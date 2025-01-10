@@ -8,9 +8,12 @@ export const dataApi = createApi({
     getAlbum: builder.query({
        query: (id) => `albums/${id}`,
     }),
+    getAlbumPhotos: builder.query({
+      query: (id) => `albums/${id}/photos`,
+   }),
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAlbumQuery } = dataApi
+export const { useGetAlbumQuery, useGetAlbumPhotosQuery } = dataApi

@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   id: null,
   color: '',
+  showPhotos: false,
 }
 
 export const album = createSlice({
@@ -22,8 +23,12 @@ export const album = createSlice({
         // doesn't actually mutate the state because it uses the Immer library,
         // which detects changes to a "draft state" and produces a brand new
         // immutable state based off those changes
-        state.color = action.payload
-      },
+      state.color = action.payload
+    },
+    toggleShowPhotos: (state, action) => {
+      //console.log('reducer', action.payload)
+      state.showPhotos = !state.showPhotos; //action.payload
+    }
     // decrement: (state) => {
     //   state.value -= 1
     //},
@@ -31,6 +36,6 @@ export const album = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { /* decrement,*/ updateAlbumId, updateAlbumColor } = album.actions
+export const { /* decrement,*/ updateAlbumId, updateAlbumColor, toggleShowPhotos } = album.actions
 
 export default album.reducer

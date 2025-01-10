@@ -1,7 +1,8 @@
 import * as React from 'react'
 import Error from './Error'
 import Loader from './Loader'
-import { useGetAlbumQuery } from './services/album'
+import Photos from './Photos'
+import { useGetAlbumQuery, useGetAlbumPhotosQuery } from './services/album'
 import { useSelector, useDispatch } from 'react-redux'
 import { /*decrement,*/ updateAlbumColor } from './reducers/album'
 
@@ -23,9 +24,18 @@ const generateBgColor = () => {
 function Album() {
   const albumId = useSelector((state) => state.album.id)
   const albumColor = useSelector((state) => state.album.color)
+  const showPhotos = useSelector((state) => state.album.showPhotos)
   const dispatch = useDispatch()
  
   const { data, error, isLoading } = useGetAlbumQuery(albumId)
+
+  const { data: photoData, error: photoError, isLoading: isPhotoLoading} = useGetAlbumPhotosQuery(
+    albumId,
+    {
+      skip: !showPhotos,
+    },
+  )
+
 
   React.useEffect(() => {
     const newColor = generateBgColor();
@@ -41,7 +51,10 @@ function Album() {
           <div  className="album-id">Album id: {data.id}</div>
           <div  className="album-title">{data.title}</div>
         </div>
-      )}
+        )}
+        {data && data.id === albumId && showPhotos && (
+          <Photos data={photoData} error={photoError} isLoading={isPhotoLoading}/>
+        )}
       
     </div>
   );

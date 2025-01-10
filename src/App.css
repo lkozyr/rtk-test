@@ -3,11 +3,8 @@
 }
 
 .album {
-  border-radius: 12px;
-  margin: 16px;
-  max-width: 400px;
   padding: 16px;
-  width: 30%;
+  width: 100%;
 }
 
 .loader {
@@ -17,4 +14,22 @@
 
 .error {
   color: red;
+}
+
+.photos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 16px 16px 16px 64px;
+  padding: 16px;
+}
+
+.photo {
+  background-color: aliceblue;
+  border: solid 1px blueviolet;
+  border-radius: 6px;
+  font-size: 12px;
+  padding: 8px;
+  margin: 8px;
+  width: 166px;
 }
